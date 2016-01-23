@@ -19,6 +19,13 @@ module.exports = (grunt) ->
         options:
           spawn: false
 
+    sass:
+      options:
+        style: 'compressed'
+      dist:
+        files:
+          './public/css/style.css': './public/sass/main.sass'
+
     express:
       options:
         script: 'index.js'
@@ -57,11 +64,12 @@ module.exports = (grunt) ->
 
   # Npm Tasks
   grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-contrib-sass'
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-express-server'
   grunt.loadNpmTasks 'grunt-mocha-test'
 
   # Tasks
   grunt.registerTask('build', ['coffeelint'])
-  grunt.registerTask('dev', ['build', 'express:dev', 'watch'])
+  grunt.registerTask('dev', ['build', 'sass', 'express:dev', 'watch'])
   grunt.registerTask('test', ['build', 'mochaTest'])

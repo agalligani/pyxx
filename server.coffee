@@ -6,10 +6,17 @@ morgan = require 'morgan'
 winston = require 'winston'
 parser = require 'body-parser'
 routes = require './app/routes/main'
-config = require './app/config/config'
+handlebars =  require 'express-handlebars'
+#config = require './app/config/config'
 
 port = process.env.PORT or 3000
 app = express()
+
+app.engine 'hbs', handlebars
+  layoutsDir: './app/views/layouts'
+  partialsDir: './app/views/partials'
+  extname: 'hbs'
+#  helpers: helpers app
 
 app.use morgan 'combined' if app.get('env') is 'development'
 
