@@ -2,9 +2,10 @@
 # Define application routes.
 express = require 'express'
 router = express.Router()
+homepage = require './homepage'
 
-router.get '/', (req, res, next) ->
-  obj = {data: {content: 'aHaaa'}}
-  res.render 'pages/homepage', obj.data
+# Routes
+# Pre-defined routes like sections/about-us etc. go here.
+router.use homepage
 
 module.exports = router

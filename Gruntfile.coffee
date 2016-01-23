@@ -9,6 +9,10 @@ module.exports = (grunt) ->
     'test/**/*.coffee'
   ]
 
+  styleFiles = [
+    'public/**/*.sass'
+  ]
+
   # Grunt Config
   grunt.initConfig
 
@@ -18,9 +22,16 @@ module.exports = (grunt) ->
         tasks: ['build', 'express:dev']
         options:
           spawn: false
+      styles:
+        files: styleFiles
+        tasks: ['sass']
+        options:
+          livereload: 35629
 
     sass:
+      all: styleFiles
       options:
+        sourceMap: true
         style: 'compressed'
       dist:
         files:
@@ -64,7 +75,7 @@ module.exports = (grunt) ->
 
   # Npm Tasks
   grunt.loadNpmTasks 'grunt-contrib-watch'
-  grunt.loadNpmTasks 'grunt-contrib-sass'
+  grunt.loadNpmTasks 'grunt-sass'
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-express-server'
   grunt.loadNpmTasks 'grunt-mocha-test'

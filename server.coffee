@@ -38,4 +38,3 @@ app.listen port, ->
   winston.info('Listening on port %s in %s mode', @address().port, app.get 'env')
 
 module.exports = app
-
