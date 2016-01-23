@@ -3,6 +3,8 @@
 express = require 'express'
 cookies = require 'cookie-parser'
 morgan = require 'morgan'
+compression = require 'compression'
+path = require 'path'
 winston = require 'winston'
 parser = require 'body-parser'
 routes = require './app/routes/main'
@@ -15,6 +17,7 @@ app = express()
 app.engine 'hbs', handlebars
   layoutsDir: './app/views/layouts'
   partialsDir: './app/views/partials'
+  defaultLayout: 'index.hbs'
   extname: 'hbs'
 #  helpers: helpers app
 
@@ -28,9 +31,11 @@ app
   .use cookies()
   .use parser.json()
   .use parser.urlencoded {extended: yes}
+  .use express.static path.join(__dirname, 'public')
   .use routes
 
 app.listen port, ->
   winston.info('Listening on port %s in %s mode', @address().port, app.get 'env')
 
 module.exports = app
+
