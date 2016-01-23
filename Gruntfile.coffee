@@ -27,6 +27,9 @@ module.exports = (grunt) ->
         tasks: ['sass']
         options:
           livereload: 35629
+  # grunt watch livereload for client scripts could also be added
+  # here... we left it out for the sake of simplicity
+  # .... this boilerplate omits frontend functionality
 
     sass:
       all: styleFiles
